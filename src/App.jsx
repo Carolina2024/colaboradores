@@ -68,7 +68,7 @@ function App() {
       </Row>
 
       <Row className="mt-2">
-        <Col md={8} xs={8} className="mb-5 w-70">
+        <Col lg={8} xs={6} className="mb-5 w-70">
           <Listado
             colaboradores={
               filteredColaboradores.length > 0
@@ -78,7 +78,7 @@ function App() {
             eliminarColaborador={eliminarColaborador}
           />
         </Col>
-        <Col ms-3 md={4} xs={8} className="w-30">
+        <Col ms-3 lg={4} xs={8} className="w-30">
           <h4 className="text-start mb-3">Agregar Colaborador</h4>
           <Formulario
             onAgregarColaborador={agregarColaborador}
