@@ -1,35 +1,94 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { BaseColaboradores } from "./utils/BaseColaboradores"; /* se agrega */
+import Listado from "./components/Listado"; /* se agrega import */
+import Formulario from "./components/Formulario"; /* se agrega import */
+import Buscador from "./components/Buscador"; /* se agrega import */
+import Alerta from "./components/Alert"; /* se agrega import */
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css"; /* se agrega */
+import { Container, Row, Col } from "react-bootstrap";
 
 function App() {
-  const [count, setCount] = useState(0)
+  /* variables de estado con hook para añadir estadosa los componentes de funcion con valor y funcion para actualizar */
+  const [colaboradores, setColaboradores] = useState(BaseColaboradores);
+  const [filteredColaboradores, setFilteredColaboradores] = useState([]);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("");
+
+  /* para agregar nuevo colaborador a la lista con reseto de los mensajes */
+  const agregarColaborador = (nuevoColaborador) => {
+    setAlertMessage("");
+    setAlertType("");
+
+    /* verifica campos completados */
+    if (
+      !nuevoColaborador.nombre ||
+      !nuevoColaborador.correo ||
+      !nuevoColaborador.edad ||
+      !nuevoColaborador.cargo ||
+      !nuevoColaborador.telefono
+    ) {
+      setAlertMessage("Completa todos los campos !");
+      setAlertType("danger");
+      return;
+    }
+
+    /* se agrega nuevo colaborador a la lista con mensaje de alerta con setTimeout para limpíar mensaje a 3seg */
+    setColaboradores([
+      ...colaboradores,
+      { id: colaboradores.length + 1, ...nuevoColaborador },
+    ]);
+    setAlertMessage("Colaborador agregado !");
+    setAlertType("success");
+
+    setTimeout(() => {
+      setAlertMessage("");
+      setAlertType("");
+    }, 3000);
+  };
+
+  /* funcion para eliminar un colaborador segun su id con metodo filter para crear nueva lista */
+  const eliminarColaborador = (id) => {
+    /* eliminar colaborador con id */
+    setColaboradores(
+      colaboradores.filter((colaborador) => colaborador.id !== id)
+    );
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Container className="p-4">
+      <h2 className="text-start">Lista de Colaboradores</h2>
+      <Row className="mt-2">
+        <Col className="small">
+          <Buscador
+            colaboradores={colaboradores}
+            setFilteredColaboradores={setFilteredColaboradores}
+          />
+        </Col>
+      </Row>
+
+      <Row className="mt-2">
+        <Col md={8} xs={8} className="mb-5 w-70">
+          <Listado
+            colaboradores={
+              filteredColaboradores.length > 0
+                ? filteredColaboradores
+                : colaboradores
+            }
+            eliminarColaborador={eliminarColaborador}
+          />
+        </Col>
+        <Col ms-3 md={4} xs={8} className="w-30">
+          <h4 className="text-start mb-3">Agregar Colaborador</h4>
+          <Formulario
+            onAgregarColaborador={agregarColaborador}
+            setError={setAlertMessage}
+          />
+          <Alerta message={alertMessage} type={alertType} />
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
-export default App
+export default App;
