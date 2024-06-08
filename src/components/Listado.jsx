@@ -1,6 +1,6 @@
-import { Table, Button } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 
-const Listado = ({ colaboradores, eliminarColaborador }) => {
+const Listado = ({ colaboradores }) => {
   return (
     <Table responsive striped bordered hover className="text-center" size="sm">
       <thead>
@@ -21,16 +21,6 @@ const Listado = ({ colaboradores, eliminarColaborador }) => {
             <td>{colaborador.edad}</td>
             <td>{colaborador.cargo}</td>
             <td>{colaborador.telefono}</td>
-            <td>
-              <Button
-                variant="danger"
-                size="sm"
-                className="mx-auto mt-1"
-                onClick={() => eliminarColaborador(colaborador.id)}
-              >
-                Eliminar
-              </Button>
-            </td>
           </tr>
         ))}
       </tbody>
