@@ -50,16 +50,8 @@ function App() {
     }, 3000);
   };
 
-  /* funcion para eliminar un colaborador segun su id con metodo filter para crear nueva lista */
-  const eliminarColaborador = (id) => {
-    /* eliminar colaborador con id */
-    setColaboradores(
-      colaboradores.filter((colaborador) => colaborador.id !== id)
-    );
-  };
-
   return (
-    <Container className="p-4">
+    <Container fluid className="mt-4 p-2 mx-2">
       <h2 className="text-start">Lista de Colaboradores</h2>
       <Row className="mt-2">
         <Col className="small">
@@ -71,18 +63,17 @@ function App() {
       </Row>
 
       <Row className="mt-2">
-        <Col lg={8} xs={6} className="mb-5 w-70">
+        <Col lg={9} xs={6} className="mb-5">
           <Listado
             colaboradores={
               filteredColaboradores.length > 0
                 ? filteredColaboradores
                 : colaboradores
             }
-            eliminarColaborador={eliminarColaborador}
           />
         </Col>
-        <Col ms-3 lg={4} xs={8} className="w-30">
-          <h4 className="text-start mb-3">Agregar Colaborador</h4>
+        <Col ms-3 lg={3} xs={8}>
+          <h3 className="text-start mb-3">Agregar Colaborador</h3>
           <Formulario
             onAgregarColaborador={agregarColaborador}
             setError={setAlertMessage}

@@ -45,11 +45,11 @@ const Formulario = ({ onAgregarColaborador, setError }) => {
 
   /* se llama al enviar el formulario */
   return (
-    <Form onSubmit={handleSubmit} className="w-75 mb-2">
+    <Form onSubmit={handleSubmit} className="w-100 mb-2">
       <Form.Group>
         <Form.Control
           type="text"
-          className="form-control-sm mb-3"
+          className="form-control-sm mb-2"
           name="nombre"
           value={colaborador.nombre}
           onChange={handleChange}
@@ -91,7 +91,7 @@ const Formulario = ({ onAgregarColaborador, setError }) => {
           onChange={handleChange}
           placeholder="Telefono del colaborador"
         />
-        <Button type="submit" className="btn btn-primary btn-sm mt-2 w-100">
+        <Button type="submit" className="btn btn-primary btn-sm mt-2 w-100" style={{backgroundColor: '#4B2DDF'}}>
           Agregar Colaborador
         </Button>
       </Form.Group>
