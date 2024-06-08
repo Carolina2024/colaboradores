@@ -10,7 +10,6 @@ const Listado = ({ colaboradores }) => {
           <th>Edad</th>
           <th>Cargo</th>
           <th>Teléfono</th>
-          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
