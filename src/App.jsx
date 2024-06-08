@@ -34,10 +34,13 @@ function App() {
     }
 
     /* se agrega nuevo colaborador a la lista con mensaje de alerta con setTimeout para limpíar mensaje a 3seg */
-    setColaboradores([
+    const nuevosColaboradores = [
       ...colaboradores,
       { id: colaboradores.length + 1, ...nuevoColaborador },
-    ]);
+    ];
+    setColaboradores(nuevosColaboradores);
+    setFilteredColaboradores(nuevosColaboradores);
+
     setAlertMessage("Colaborador agregado !");
     setAlertType("success");
 
