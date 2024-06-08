@@ -11,7 +11,7 @@ const Alerta = ({ message, type }) => {
   return (
     <Alert
       variant={alertClass}
-      className="mt-2 w-75 small">
+      className="mt-2 w-100 small">
       {message}
     </Alert>
 
